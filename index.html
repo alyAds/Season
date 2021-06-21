@@ -1,10 +1,57 @@
+<!doctype html>
+<html>
+<head>
 <title>Kelompok 4 . Pemrograman Internet</title>
-<ol>
-  <li><b>Ali Arman Daulay</b></li>
-  <li>Dimas Ahmad Raihan</li>
-  <li>Jian Marcel</li>
-  <li>M. Fikri Saputra</li>
-  <li>Rezalisa</li>
-  <li>Shauqi Saufan</li>
-  <li>Tengkurap</li>
-</ol>
+<link rel="stylesheet" type="text/css" href="css/season.css">
+</head>
+<body>
+	<header>
+		<a href="#" class="logo">weBSITE</a>
+		<ul>
+			<li><a href="#" class="active">Home</a></li>
+			<li><a href="#">About</a></li>
+			<li><a href="#">Work</a></li>
+			<li><a href="#">Contact</a></li>
+		</ul>
+	</header>
+	<section>
+		<img src="images/stars.png" id="stars">
+		<img src="images/moon.png" id="moon">
+		<img src="images/mountains_behind malam.png" id="mountains_behind_malam">
+		<h2 id="text">Moon Light</h2>
+		<a href="#sec" id="btn">Klik Disini</a>
+		<img src="images/mountains_front malam.png" id="mountains_front_malam">
+	</section>
+	<div class="sec" id="sec">
+		<h2>Kelompok 4</h2>
+		<p><b>1.ALI ARMAN DAULAY</b><br><br>
+			  2.DIMAS AHMAD RAIHAN<br><br>
+			  3.JIAN MARCEL HAMONANGAN SILALAHI<br><br>
+			  4.MUHAMMAD FIKRI SAPUTRA<br><br>
+			  5.REZA LISA RAHMADANI PASARIBU<br><br>
+			  6.SHAUQI SHAUFAN<br><br>
+			  7.TENGKU RAFLI FATA
+		</p>
+	</div>
+	<script>
+		let stars = document.getElementById('stars');
+		let moon = document.getElementById('moon');
+		let mountains_behind_malam = document.getElementById('mountains_behind_malam');
+		let text = document.getElementById('text');
+		let btn = document.getElementById('btn');
+		let mountains_front_malam = document.getElementById('mountains_front_malam');
+		let header = document.querySelector('header');
+		window.addEventListener('scroll', function(){
+			let value = window.scrollY;
+			stars.style.left = value * 0.25 + 'px';
+			moon.style.top = value * 1.05 + 'px';
+			mountains_behind_malam.style.top = value * 0.5 + 'px';
+			mountains_front_malam.style.top = value * 0 + 'px';
+			text.style.marginRight = value * 4 + 'px';
+			text.style.marginTop = value * 1.5 + 'px';
+			btn.style.marginTop = value * 1.5 + 'px';
+			header.style.top = value * 0.5 + 'px';
+		})
+	</script>
+</body>
+</html>
