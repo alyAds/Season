@@ -3,15 +3,16 @@
 <head>
 <title>Kelompok 4 . Pemrograman Internet</title>
 <link rel="stylesheet" type="text/css" href="css/season.css">
+<script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
 </head>
 <body>
 	<header>
-		<a href="#" class="logo">weBSITE</a>
+		<a href="#" class="logo">Season</a>
 		<ul>
-			<li><a href="#" class="active">Home</a></li>
-			<li><a href="#">About</a></li>
-			<li><a href="#">Work</a></li>
-			<li><a href="#">Contact</a></li>
+			<li><a href="#" class="active">Night</a></li>
+			<li><a href="#">Noon</a></li>
+			<li><a href="#">Noon Rain</a></li>
+			<li><a href="#">Night Rain</a></li>
 		</ul>
 	</header>
 	<section>
@@ -33,25 +34,6 @@
 			  7.TENGKU RAFLI FATA
 		</p>
 	</div>
-	<script>
-		let stars = document.getElementById('stars');
-		let moon = document.getElementById('moon');
-		let mountains_behind_malam = document.getElementById('mountains_behind_malam');
-		let text = document.getElementById('text');
-		let btn = document.getElementById('btn');
-		let mountains_front_malam = document.getElementById('mountains_front_malam');
-		let header = document.querySelector('header');
-		window.addEventListener('scroll', function(){
-			let value = window.scrollY;
-			stars.style.left = value * 0.25 + 'px';
-			moon.style.top = value * 1.05 + 'px';
-			mountains_behind_malam.style.top = value * 0.5 + 'px';
-			mountains_front_malam.style.top = value * 0 + 'px';
-			text.style.marginRight = value * 4 + 'px';
-			text.style.marginTop = value * 1.5 + 'px';
-			btn.style.marginTop = value * 1.5 + 'px';
-			header.style.top = value * 0.5 + 'px';
-		})
-	</script>
+	<script type="text/javascript" src="javascript/season.js"></script>
 </body>
 </html>
