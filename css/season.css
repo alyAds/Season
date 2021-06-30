@@ -72,6 +72,7 @@ section img#mountains_front_malam, section img#mountains_behind_malam {
 	position: fixed;
 }
 section img {
+	top: 0;
 	position: absolute;
 	left: 0;
 	width: 100%;
@@ -79,13 +80,10 @@ section img {
 	object-fit: cover;
 	pointer-events: none;
 }
-section img:not(#moon) {
-	top: 0;
-}
 section img#moon {
-	bottom: 0;
+	bottom: -10%;
+	position: fixed;
 	mix-blend-mode: screen;
-	transform: rotate(0deg);
 }
 section img#mountains_front_malam {
 	z-index: 10;
