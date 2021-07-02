@@ -1,8 +1,7 @@
 $(document).ready(function() {
 	let windowHeight = $(window).outerHeight();
 	let satuanDeg = windowHeight / 185;
-	// let roundSatuanDeg = Math.floor(satuanDeg);
-	// let decimalsSatuanDeg = satuanDeg - roundSatuanDeg;
+	let opacityNight = 1;
 	let moon = $("#moon");
 	let seasons = ["night", "noon", "noonRain", "nightRain"];
 	
@@ -24,10 +23,12 @@ $(document).ready(function() {
 		const nightYaxis = document.getElementById("night").getBoundingClientRect().top;
 		// let a = (($("body").height() / $(this).outerHeight()) * 2 ) ;
 
+		opacityNight = (((nightYaxis/2) / windowHeight) * 100) / 100;
 		
 		// $("#abc").text(valScrlTop)
-		$("#hij").text(nightYaxis)
-		// $("#efg").text(nightYaxis - valScrlTop)
+		$("#hij").text(opacityNight)
+		$("#efg").text(nightYaxis)
+
 
 
 		if (nightYaxis > (windowHeight*(22/100))) {
