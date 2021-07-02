@@ -9,7 +9,7 @@
 body {
 	min-height:  100vh;
 	overflow-x: hidden;
-	background: linear-gradient(#2b1055,#7597de);
+	background: linear-gradient(#2b1055,#a3c1ff, #7395dc, #210b44);
 }
 header {
 	position: fixed;
@@ -68,12 +68,11 @@ section {
 	background: linear-gradient(to top, #1c0522,transparent);
 	z-index: 1000;
 }*/
-section img#mountains_front_malam,
-section img#mountains_behind_malam,
+section img.mountains,
 section img#stars {
 	position: fixed !important;
 }
-section img:not(#moon) {
+section img:not(.light) {
 	top: 0;
 	position: absolute;
 	left: 0;
@@ -82,17 +81,22 @@ section img:not(#moon) {
 	object-fit: cover;
 	pointer-events: none;
 }
-section img#moon {
-	margin-bottom: -8vh;
-	bottom: 0;
+section img.light {
+	top: 0;
 	left: 50%;
 	margin-left: -256px;
 	position: fixed;
 	mix-blend-mode: screen;
 	transform: scale(0.4);
 }
-section img#mountains_front_malam {
+section img.sun-light {
+	transform: scale(0.8);
+}
+section img.mountains_siang {
 	z-index: 10;
+}
+section img.mountains_malam {
+	z-index: 11;
 }
 #text {
 	position: absolute;
