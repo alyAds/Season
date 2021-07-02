@@ -72,7 +72,7 @@ section img.mountains,
 section img#stars {
 	position: fixed !important;
 }
-section img:not(.light) {
+section img:not(.light, .clouds) {
 	top: 0;
 	position: absolute;
 	left: 0;
@@ -81,6 +81,56 @@ section img:not(.light) {
 	object-fit: cover;
 	pointer-events: none;
 }
+section img.clouds {
+	left: -1000px;
+	z-index: 11;
+	position: fixed;
+	transform: scale(0.34);
+	transition: left .8s ease-in-out;
+}
+section img.sc1-lhc-1,
+section img.sc1-lhc-2,
+section img.sc1-rhc-1,
+section img.sc1-rhc-2 {
+	top: -153px;
+	z-index: 10;
+}
+section img.sc1-tc-1,
+section img.sc1-tc-2 {
+	z-index: 12;
+	transform: scale(0.2);
+}
+section img.sc1-tc-1 {
+	top: 119px;
+}
+section img.sc1-tc-2 {
+	top: 129px;
+}
+section img.sc2-tm-1 {
+	top: -19px;
+	z-index: 10;
+}
+section img.sc2-tm-2 {
+	top: 0px;
+	z-index: 12;
+}
+section img.sc2-lhc {
+	top: -135px;
+}
+section img.sc3-mm {
+	top: 260px;
+	z-index: 11;
+	transform: scale(0.24);
+}
+section img.sc-rhc {
+	top: -128px;
+	z-index: 12;
+}
+section img.sc-bm {
+	top: 88px;
+	z-index: 10;
+}
+
 section img.light {
 	top: 0;
 	left: 50%;
