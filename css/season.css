@@ -68,7 +68,17 @@ section {
 	background: linear-gradient(to top, #1c0522,transparent);
 	z-index: 1000;
 }*/
+.z11 {
+	z-index: 11 !important;
+}
+.z10 {
+	z-index: 10 !important;
+}
+.z9 {
+	z-index: 9 !important;
+}
 section img.mountains,
+section img#rain_front,
 section img#stars {
 	position: fixed !important;
 }
@@ -81,12 +91,45 @@ section img:not(.light, .clouds) {
 	object-fit: cover;
 	pointer-events: none;
 }
-section img.clouds {
+img.clouds {
 	left: -1000px;
 	z-index: 11;
 	position: fixed;
 	transform: scale(0.34);
 	transition: left .8s ease-in-out;
+}
+img.clouds.dark-clouds{
+	opacity: 0.7;
+}
+img.clouds.night-clouds {
+	left: -1000px;
+    top: 0;
+    transform: scale(1) rotate(180deg);
+    margin-top: -185px;
+}
+img.night-cloud-6, img.night-cloud-7, img.night-cloud-14 {
+	top: 1vw !important;
+}
+img.night-cloud-9 {
+	top: 2vw !important;
+}
+img.night-cloud-8, img.night-cloud-13 {
+	top: 3vw !important;
+}
+img.night-cloud-10 {
+	top: 4vw !important;
+}
+img.night-cloud-11 {
+	top: 6vw !important;
+}
+img.night-cloud-12 {
+	top: 8vw !important;
+}
+img.night-cloud-15, img.night-cloud-16 {
+	top: -3vw !important;
+}
+img.night-cloud-17 {
+	top: -7vw !important;
 }
 section img.sc1-lhc-1,
 section img.sc1-lhc-2,
@@ -147,6 +190,11 @@ section img.mountains_siang {
 }
 section img.mountains_malam {
 	z-index: 11;
+}
+section img.rain_front {
+	z-index: 10;
+	opacity: 0;
+	transition: opacity .8s ease-in-out;
 }
 #text {
 	position: absolute;
