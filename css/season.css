@@ -49,6 +49,10 @@ header ul li a.active {
 	background: #fff;
 	color: #2b1055;
 }
+header ul li a.active-info {
+	background: #d6033d;
+    color: #ffffff;
+}
 section {
 	position: relative;
 	width: 100%;
@@ -175,7 +179,7 @@ section img.sc-bm {
 }
 
 section img.light {
-	top: 0;
+	top: 100vw;
 	left: 50%;
 	margin-left: -256px;
 	position: fixed;
@@ -216,16 +220,30 @@ section img.rain_front {
 	transform: translate(8px);
 }
 .sec {
-	position: relative;
-	padding: 100px;
-	/*background: #1c0522;*/
+	top: 0;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    left: 0;
+    z-index: 15;
+    background: #1c0522;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity .5s ease-in-out;
 }
-.sec h2 {
-	font-size: 3.5em;
-	margin-bottom: 10px;
-	color: #fff;
+.sec h1 {
+	font-size: 3em;
+	margin-bottom: 15px;
+	color: #8e00b3;
+}
+.sec ol {
+	color: #917398;
+	padding-left: 20px;
 }
 .sec p {
-	font-size: 1em;
-	color: #fff;
+	color: #482e4e;
+    margin-top: 20px;
+    font-size: 13px;
 }

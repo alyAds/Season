@@ -5,13 +5,13 @@ $(document).ready(function() {
 	const mountainsMalam = $(".mountains_malam");
 	const mountainsSiang = $(".mountains_siang");
 	const seasons = ["night", "noon", "noonRain", "nightRain"];
+	const pointsForScrollSeason = [0, 18.264, 45.66, 60.89];
+	const idSees = ["#seeNight", "#seeNoon", "#seeNoonRain", "#seeNightRain"];
 
 	let windowHeight = $(window).outerHeight();
 	let ntahApa = 0;
 
 	resizeSeasonHeight(seasons, windowHeight);
-
-	$(window).animate({scrollTop: 0}, 400);
 
 	const night = document.getElementById('night');
 	const noon = document.getElementById('noon');
@@ -23,10 +23,6 @@ $(document).ready(function() {
 	let noonRainAxisY = seasonAxisY(noonRain);
 	let valScrlTop = $(window).scrollTop();
 
-
-	seasonNight($(window), night, moon, stars, mountainsMalam)
-	noonSunPosition(valScrlTop, noonAxisY, windowHeight, sun)
-
 	$(window).resize(function(event) {
 		windowHeight = $(window).outerHeight(); 
 		valScrlTop = $(this).scrollTop();
@@ -35,7 +31,7 @@ $(document).ready(function() {
 		resizeSeasonHeight(seasons, windowHeight)
 		seasonNight($(this), night, moon, stars, mountainsMalam)
 		noonSunPosition(valScrlTop, noonAxisY, windowHeight, sun)
-		seasonNoonRainUntilNightRoon($(this), noonRain, nightRainOffsetTop)
+		seasonNoonRainUntilNightRain($(this), noon, noonRain, nightRain, nightRainOffsetTop, noonRainOffsetTop)
 	})
 
 	$(window).scroll(function(event) {
@@ -45,15 +41,66 @@ $(document).ready(function() {
 		noonRainAxisY = seasonAxisY(noonRain);
 		nightRainAxisY = seasonAxisY(noonRain);
 
-		// $("#hij").text(valScrlTop)
-		// $("#efg").text(noonRainAxisY)
-		// $("#abc").text(valScrlTop)
+		for (var i = 0; i < pointsForScrollSeason.length; i++) {
+			if ($("html, body").scrollTop() >= scrollPointForEverySeason(pointsForScrollSeason[i])) {
+				$("header a").removeClass('active');
+				$(idSees[i]).addClass('active');
+			}
+		}
 
-		seasonNoonRainUntilNightRoon($(this), noonRain, nightRainOffsetTop)
+		seasonNoonRainUntilNightRain($(this), noon, noonRain, nightRain, nightRainOffsetTop, noonRainOffsetTop)
 
 		seasonNight($(this), night, moon, stars, mountainsMalam)
 		seasonNoonUntilNoonRain($(this), noon, noonRain, sun, mountainsMalam, noonRainOffsetTop, nightRainOffsetTop);
 	});
+
+	$("header a:not(.logo)").click(function() {
+		let idSee = $(this).attr('id');
+		let valScrollTop = 0;
+
+		switch(idSee) {
+			case "seeNight":
+				valScrollTop = 0;
+				$("#about").css('opacity', '0');
+			break;
+			case "seeNoon":
+				valScrollTop = scrollPointForEverySeason(33.485);
+				$("#about").css('opacity', '0');
+			break;
+			case "seeNoonRain":
+				valScrollTop = scrollPointForEverySeason(45.66);
+				$("#about").css('opacity', '0');
+			break;
+			case "seeNightRain":
+				valScrollTop = scrollPointForEverySeason(80);
+				$("#about").css('opacity', '0');
+			break;
+			default:
+				if ($(this).hasClass('active-info')) {
+					$("#about").css('opacity', '0');
+					$(this).removeClass('active-info')
+					$(this).text('About')
+				} else {
+					$("#about").css('opacity', '1');
+					$(this).addClass('active-info')
+					$(this).text('Close')
+				}
+
+				$("html, body").scrollTop($("html, body").scrollTop() + 1);
+			break;
+		}
+
+		$("header a").removeClass('active');
+
+		if (idSee !== "seeInfo") {
+			$(this).addClass('active');
+			$("html, body").animate({scrollTop: valScrollTop}, 0.5)
+		}
+
+		return false;
+	});
+
+	$("html, body").animate({scrollTop: 0}, 0.5)
 });
 
 function resizeSeasonHeight(seasons, windowHeight) {
@@ -117,6 +164,35 @@ function seasonNoonUntilNoonRain(windoww, noon, noonRain, sun, mountainsMalam, n
 		$(".night-clouds").css('left', '-1000px');
 	} else if (valScrlTop < ((nightRainOffsetTop) - windowHeight) && valScrlTop > windowHeight) {
 		$(".summer-clouds").css('left', '-1000px');
+	}
+
+}
+
+function seasonNoonRainUntilNightRain(windoww, noon, noonRain, nightRain, nightRainOffsetTop, noonRainOffsetTop) {
+	let windowHeight = windoww.outerHeight(); 
+	let valScrlTop = windoww.scrollTop();
+	let noonRainAxisY = seasonAxisY(noonRain);
+	let nightRainAxisY = seasonAxisY(nightRain);
+	let noonAxisY = seasonAxisY(noon);
+
+	if (valScrlTop < ((noonRainOffsetTop * (200/100)) - windowHeight) && valScrlTop > windowHeight) {
+		let opacityNoon = opacitySeason(noonRainAxisY, windowHeight) - 0.3;		
+
+		$(".mountains_siang").css('opacity', opacityNoon);
+	} 
+
+	if (valScrlTop > noonRainOffsetTop) {
+		let opacityNoonRain = opacitySeason(nightRainAxisY, windowHeight) - 0.3;		
+
+		$(".mountains_siang_rain").css('opacity', opacityNoonRain);
+
+		$("#sun").css('top', ((noonRainAxisY/3) - (windowHeight*(30/100)))+ 'px');
+	}
+
+	if (valScrlTop > ((nightRainOffsetTop * (80/100)) - windowHeight)) {
+		let opacityHujan = opacitySeason(valScrlTop, windowHeight) - 0.3;
+
+		$(".rain_front").css('opacity', opacityHujan);
 		$(".night-cloud-1").css('left', '-2vw');
 		$(".night-cloud-2").css('left', '19vw');
 		$(".night-cloud-3").css('left', '39vw');
@@ -134,27 +210,6 @@ function seasonNoonUntilNoonRain(windoww, noon, noonRain, sun, mountainsMalam, n
 		$(".night-cloud-15").css('left', '24vw');
 		$(".night-cloud-16").css('left', '59vw');
 		$(".night-cloud-17").css('left', '9vw');
-	}
-	$("#hij").text(valScrlTop)
-	$("#abc").text(((nightRainOffsetTop) - windowHeight))
-
-}
-
-function seasonNoonRainUntilNightRoon(windoww, noonRain, nightRainOffsetTop) {
-	let windowHeight = windoww.outerHeight(); 
-	let valScrlTop = windoww.scrollTop();
-	let noonRainAxisY = seasonAxisY(noonRain);
-
-	if (valScrlTop < ((nightRainOffsetTop * (200/100)) - windowHeight) && valScrlTop > windowHeight) {
-		let opacityNoon = opacitySeason(noonRainAxisY, windowHeight) - 0.3;
-		
-		$(".mountains_siang").css('opacity', opacityNoon);
-	}
-
-	if (valScrlTop > ((nightRainOffsetTop * (80/100)) - windowHeight)) {
-		let opacityHujan = opacitySeason(valScrlTop, windowHeight) - 0.3;
-
-		$(".rain_front").css('opacity', opacityHujan);
 	} else {
 		$(".rain_front").css('opacity', 0);
 	}
@@ -162,6 +217,8 @@ function seasonNoonRainUntilNightRoon(windoww, noonRain, nightRainOffsetTop) {
 
 function noonSunPosition(valScrlTop, noonAxisY, windowHeight, sun) {
 	if (valScrlTop < noonAxisY) {		
+		sun.css('top', ((noonAxisY/2) - (windowHeight*(30/100)))+ 'px');
+	} else if (valScrlTop > noonAxisY) {
 		sun.css('top', ((noonAxisY/2) - (windowHeight*(30/100)))+ 'px');
 	}
 
@@ -175,4 +232,8 @@ function opacitySeason(seasonAxisY, windowHeight) {
 
 function seasonAxisY(season) {
 	return season.getBoundingClientRect().top;
+}
+
+function scrollPointForEverySeason(point) {
+	return (point / 100) * $(document).outerHeight();
 }
