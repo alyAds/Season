@@ -11,8 +11,6 @@ $(document).ready(function() {
 	let windowHeight = $(window).outerHeight();
 	let ntahApa = 0;
 
-	resizeSeasonHeight(seasons, windowHeight);
-
 	const night = document.getElementById('night');
 	const noon = document.getElementById('noon');
 	const noonRain = document.getElementById('noonRain');
@@ -28,13 +26,10 @@ $(document).ready(function() {
 		valScrlTop = $(this).scrollTop();
 		noonAxisY = seasonAxisY(noon);
 
-		resizeSeasonHeight(seasons, windowHeight)
 		seasonNight($(this), night, moon, stars, mountainsMalam)
 		noonSunPosition(valScrlTop, noonAxisY, windowHeight, sun)
 		seasonNoonRainUntilNightRain($(this), noon, noonRain, nightRain, nightRainOffsetTop, noonRainOffsetTop)
 	})
-
-	// alert($("html, body").scrollTop())
 
 	$(window).scroll(function(event) {
 		windowHeight = $(window).outerHeight(); 
@@ -50,26 +45,7 @@ $(document).ready(function() {
 			}
 		}
 
-		if (valScrlTop >= scrollPointForEverySeason(30.44)) {
-			if ($(".summer-clouds").hasClass('def-img')) {
-				$(".summer-clouds").removeClass('def-img');
-
-				$(".summer-clouds-sc1").attr('src', 'images/summer cloud 1.png');
-				$(".summer-clouds-sc2").attr('src', 'images/summer cloud 2.png');
-				$(".summer-clouds-sc3").attr('src', 'images/summer cloud 3.png');
-				$(".summer-clouds-sc4").attr('src', 'images/summer cloud.png');
-			}
-		} 
-
-		if (valScrlTop >= scrollPointForEverySeason(40)) {
-			if ($(".night-clouds").hasClass('def-img')) {
-				$(".night-clouds").removeClass('def-img');
-
-				$(".night-clouds:not('.dark-clouds')").attr('src', 'images/night cloud.png');
-				$(".dark-clouds").attr('src', 'images/dark cloud2.png');
-			}
-		}
-
+		lazyLoadingImgSeason(valScrlTop);
 		seasonNight($(this), night, moon, stars, mountainsMalam)
 		seasonNoonUntilNoonRain($(this), noon, noonRain, sun, mountainsMalam, noonRainOffsetTop, nightRainOffsetTop);
 		seasonNoonRainUntilNightRain($(this), noon, noonRain, nightRain, nightRainOffsetTop, noonRainOffsetTop)
@@ -124,9 +100,26 @@ $(document).ready(function() {
 	$("html, body").animate({scrollTop: 0}, 0.5)
 });
 
-function resizeSeasonHeight(seasons, windowHeight) {
-	for (var i = 0; i < seasons.length; i++) {
-		$('#'+seasons[i]).height(windowHeight);
+function lazyLoadingImgSeason(valScrlTop) {
+	if (valScrlTop >= scrollPointForEverySeason(30.44)) {
+		if ($(".summer-clouds").hasClass('def-img')) {
+			$(".summer-clouds").removeClass('def-img');
+
+			$(".summer-clouds-sc1").attr('src', 'images/summer cloud 1.png');
+			$(".summer-clouds-sc2").attr('src', 'images/summer cloud 2.png');
+			$(".summer-clouds-sc3").attr('src', 'images/summer cloud 3.png');
+			$(".summer-clouds-sc4").attr('src', 'images/summer cloud.png');
+		}
+	} 
+
+	if (valScrlTop >= scrollPointForEverySeason(40)) {
+		if ($(".night-clouds").hasClass('def-img')) {
+			$(".night-clouds").removeClass('def-img');
+
+			$(".night-clouds:not('.dark-clouds')").attr('src', 'images/night cloud.png');
+			$(".dark-clouds").attr('src', 'images/dark cloud2.png');
+			$(".rain_front").attr('src', 'images/rain1.gif');
+		}
 	}
 }
 
@@ -210,7 +203,7 @@ function seasonNoonRainUntilNightRain(windoww, noon, noonRain, nightRain, nightR
 		$("#sun").css('top', ((noonRainAxisY/3) - (windowHeight*(30/100)))+ 'px');
 	}
 
-	if (valScrlTop > ((nightRainOffsetTop * (80/100)) - windowHeight)) {
+	if (valScrlTop >= scrollPointForEverySeason(40)) {
 		let opacityHujan = opacitySeason(valScrlTop, windowHeight) - 0.3;
 
 		$(".rain_front").css('opacity', opacityHujan);
