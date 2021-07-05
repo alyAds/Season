@@ -29,6 +29,40 @@ header .logo {
 	font-size: 2em;
 	letter-spacing: 2px;
 }
+header ul.small-nav {
+	display: none;
+}
+header ul.small-nav a {
+	display: block;
+	height: 40px;
+}
+header ul.small-nav span {
+	width: 30px;
+	height: 4px;
+	background: #fff;
+	display: block;
+	transition: all .2s ease-in-out;
+}
+header ul.small-nav span:first-child {
+	margin-bottom: 4px;
+}
+header ul.small-nav span:nth-child(2) {
+	margin-bottom: 4px;
+}
+header ul.small-nav li a:hover {
+	background: transparent;
+}
+header ul.small-nav li a.active span:first-child {
+	margin-bottom: -4px;
+	transform: rotate(45deg);
+}
+header ul.small-nav li a.active span:nth-child(2) {
+    transform: rotate(-45deg);
+}
+header ul.small-nav li a.active span:last-child {
+	width: 0;
+	height: 0;
+}
 header ul {
 	display: flex;
 	justify-content: center;
@@ -44,8 +78,8 @@ header ul li a {
 	color: #fff;
 	border-radius: 20px;
 }
-header ul li a:hover ,
-header ul li a.active {
+header ul:not(.small-nav) li a:hover ,
+header ul:not(.small-nav) li a.active {
 	background: #fff;
 	color: #2b1055;
 }
@@ -53,6 +87,29 @@ header ul li a.active-info {
 	background: #d6033d;
     color: #ffffff;
 }
+
+@media (max-width: 912px) {
+	header ul.big-nav {
+	    position: absolute;
+	    display: none;
+	    direction: rtl;
+	    right: 100px;
+	    top: 108px;
+	}
+	header ul.big-nav li {
+		margin-bottom: 15px;
+	}
+
+	header ul.small-nav {
+		display: block;
+	}
+}
+@media (min-width: 913px) {
+	header ul.big-nav {
+	    display: flex !important;
+	}
+}
+
 section {
 	position: relative;
 	width: 100%;

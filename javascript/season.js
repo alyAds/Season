@@ -40,7 +40,7 @@ $(document).ready(function() {
 
 		for (var i = 0; i < pointsForScrollSeason.length; i++) {
 			if ($("html, body").scrollTop() >= scrollPointForEverySeason(pointsForScrollSeason[i])) {
-				$("header a").removeClass('active');
+				$("header .big-nav a").removeClass('active');
 				$(idSees[i]).addClass('active');
 			}
 		}
@@ -56,6 +56,15 @@ $(document).ready(function() {
 		let valScrollTop = 0;
 
 		switch(idSee) {
+			case "seeSmallNav":
+				$(this).toggleClass('active');
+
+				if ($(this).hasClass('active')) {
+					$(".big-nav").show('fast');
+				} else {
+					$(".big-nav").hide('fast');
+				}
+			break;
 			case "seeNight":
 				valScrollTop = 0;
 				$("#about").css('opacity', '0');
@@ -87,10 +96,12 @@ $(document).ready(function() {
 			break;
 		}
 
-		$("header a").removeClass('active');
+		$("header .big-nav a").removeClass('active');
 
-		if (idSee !== "seeInfo") {
+		if (idSee == "seeNight" || idSee == "seeNoon" || idSee == "seeNoonRain" || idSee == "seeNightRain") {
 			$(this).addClass('active');
+			$("#seeInfo").text('About')
+			$("#seeInfo").removeClass('active-info');
 			$("html, body").animate({scrollTop: valScrollTop}, 0.5)
 		}
 
