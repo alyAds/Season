@@ -97,7 +97,7 @@ header ul li a.active-info {
 	    position: absolute;
 	    display: none;
 	    direction: rtl;
-	    right: 100px;
+	    right: 20px;
 	    top: 108px;
 	}
 	header ul.big-nav li {
